@@ -9,9 +9,11 @@ export async function checkExistsUserAccount(req: Request, res: Response, next: 
     });
 
     if (!petshop) {
-        return res.status(404).json({ error: "PetShop não encontrado" });
+        res.status(404).json({ error: "PetShop não encontrado" });
+        return;
     }
 
     req.petshop = petshop;
     next();
+    return;
 }

@@ -6,8 +6,10 @@ export async function checkUsersEquals(req: Request, res: Response, next: NextFu
     const petshop = await prisma.petShop.findUnique({ where: { cnpj } });
 
     if (petshop) {
-        return res.status(400).json({ message: "Já existe esse PetShop!" });
+        res.status(400).json({ message: "Já existe esse PetShop!" });
+        return;
     }
 
     next();
+    return;
 }

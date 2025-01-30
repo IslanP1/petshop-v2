@@ -1,9 +1,10 @@
 import { Router } from "express";
-import { create } from "../controllers/petshop.controller";
+import { list, create } from "../controllers/pet.controller";
 import { checkExistsUserAccount } from "../middlewares/checkExistsUserAccount";
 
 const router = Router();
 
 router.post("/", checkExistsUserAccount, create);
+router.get("/", checkExistsUserAccount, list);
 
 export default router;

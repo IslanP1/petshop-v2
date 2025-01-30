@@ -1,0 +1,27 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite" 
+  url      = "file:./dev.db"
+}
+
+model Pet {
+  id                 String   @id @default(uuid())
+  name               String
+  type               String
+  description        String
+  vacinated          Boolean
+  deadlineVacination DateTime
+  createdAt          DateTime @default(now())
+  petshopId          String
+  petshop            PetShop  @relation(fields: [petshopId], references: [id])
+}
+
+model PetShop {
+  id    String @id @default(uuid())
+  name  String
+  cnpj  String  @unique
+  pets  Pet[]
+}

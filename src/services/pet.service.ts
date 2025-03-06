@@ -54,7 +54,7 @@ export const updatePet = async (
     });
 }
 
-const updateStatusVacination = async (
+export const updateStatusVacination = async (
     id: string,
     vacinated: boolean, 
     petshopCnpj: string

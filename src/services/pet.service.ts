@@ -31,3 +31,25 @@ export const listPets = async (petshopCnpj: string) => {
         where: { petshop: { cnpj: petshopCnpj } }
     })
 }
+
+export const updatePet = async (
+    id: string,
+    name: string,
+    type: string,
+    description: string,
+    deadlineVacination: Date,
+    petshopCnpj: string
+) => {
+    return await prisma.pet.update({
+        where: { id },
+        data: {
+            name,
+            type,
+            description,
+            deadlineVacination: new Date(deadlineVacination),
+            petshop: {
+                connect: { cnpj: petshopCnpj }
+            }
+        }
+    });
+}

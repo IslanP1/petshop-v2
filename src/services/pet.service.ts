@@ -53,3 +53,19 @@ export const updatePet = async (
         }
     });
 }
+
+const updateStatusVacination = async (
+    id: string,
+    vacinated: boolean, 
+    petshopCnpj: string
+) => {
+    return await prisma.pet.update({
+        where: { id },
+        data: {
+            vacinated, 
+            petshop: {
+                connect: { cnpj: petshopCnpj }
+            }
+        }
+    });
+}

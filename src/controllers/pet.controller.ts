@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { listPets, createPet, updatePet, updateStatusVacination } from "../services/pet.service";
+import { listPets, createPet, updatePet, updateStatusVacination, deletePet } from "../services/pet.service";
 
-export const create = async (req: Request, res: Response) => {
+export const createPetController = async (req: Request, res: Response) => {
     const { name, type, description, deadlineVacination, vacinated } = req.body;
     const petshopCnpj = req.headers.cnpj as string;
     const createdAt = new Date(); // Data atual
@@ -11,14 +11,14 @@ export const create = async (req: Request, res: Response) => {
     return;
 };
 
-export const list = async (req: Request, res: Response) => {
+export const listPetsController = async (req: Request, res: Response) => {
     const cnpj = req.headers.cnpj as string;
     const pets = await listPets(cnpj);
     res.status(200).json(pets);
     return;
 }
 
-export const update = async (req: Request, res: Response) => {
+export const updatePetController = async (req: Request, res: Response) => {
     const id = req.params.id;
     const { name, type, description, deadlineVacination } = req.body;
     const petshopCnpj = req.headers.cnpj as string;
@@ -33,6 +33,13 @@ export const updateStatus = async (req: Request, res: Response) => {
     const { vacinated } = req.body;
     const petshopCnpj = req.headers.cnpj as string;
     const pet = await updateStatusVacination(id, vacinated, petshopCnpj);
+    res.status(200).json(pet);
+    return;
+}
+
+export const deletePetController = async (req: Request, res: Response) => {
+    const id = req.params.id;
+    const pet = await deletePet(id);
     res.status(200).json(pet);
     return;
 }

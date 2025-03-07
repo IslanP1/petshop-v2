@@ -69,3 +69,9 @@ export const updateStatusVacination = async (
         }
     });
 }
+
+export const deletePet = async (id: string) => {
+    return await prisma.pet.delete({
+        where: { id }
+    });
+}
